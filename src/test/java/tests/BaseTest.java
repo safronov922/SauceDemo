@@ -8,7 +8,6 @@ import org.testng.annotations.BeforeTest;
 
 public class BaseTest {
     WebDriver driver;
-
     @BeforeMethod
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
