@@ -12,7 +12,7 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void logInTest() {
-        LoginPage loginPage = new LoginPage(driver);
+        loginPage = new LoginPage(driver);
         loginPage.openLogInPage();
         loginPage.inputLogin(USER_NAME);
         loginPage.inputPassword(PASSWORD);
