@@ -7,7 +7,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
 public class BaseTest {
+    private static final String USER_NAME = "standard_user";
+    private static final String PASSWORD = "secret_sauce";
+
     WebDriver driver;
+
     @BeforeMethod
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
