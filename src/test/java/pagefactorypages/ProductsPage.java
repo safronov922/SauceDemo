@@ -44,14 +44,18 @@ public class ProductsPage extends BasePage {
     public String getPrice() {
         return price.getText();
     }
-    public void clickOnLinkedInButton(){
+
+    public void clickOnLinkedInButton() {
         linkedInButton.click();
     }
-    public void switchToNewTab(){
-        Set<String> tab_handles = driver.getWindowHandles();
-        int number_of_tabs = tab_handles.size();
-        int new_tab_index = number_of_tabs-1;
-        driver.switchTo().window(String.valueOf(new_tab_index));
-    }
 
+    public void switchToNewTab() {
+        String oldTabHandle = driver.getWindowHandle();
+        Set<String> tabHandles = driver.getWindowHandles();
+        for (String newTabIndex : tabHandles) {
+            if (!oldTabHandle.equals(newTabIndex)) {
+                driver.switchTo().window(newTabIndex);
+            }
+        }
+    }
 }
