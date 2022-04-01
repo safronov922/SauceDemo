@@ -13,12 +13,12 @@ public class AddItemTest extends BaseTest {
 
     @Test
     public void addItemToBasketTest() {
-        LoginPage loginPage = new LoginPage(driver);
+        loginPage = new LoginPage(driver);
         loginPage.openLogInPage();
         loginPage.inputLogin(USER_NAME);
         loginPage.inputPassword(PASSWORD);
         loginPage.clickLogInButton();
-        ProductsPage productsPage = new ProductsPage(driver);
+        productsPage = new ProductsPage(driver);
         productsPage.clickAddBikeLightButton();
         productsPage.clickShoppingContainer();
         Assert.assertEquals(productsPage.getItemName(), "Sauce Labs Bike Light");
