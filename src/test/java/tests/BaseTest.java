@@ -23,7 +23,7 @@ public class BaseTest {
     @BeforeMethod
     public void setUp() {
         DriverFactory driverFactory = new DriverFactory();
-        driverManager = driverFactory.getManager(DriverType.MOZILLA);
+        driverManager = driverFactory.getManager(DriverType.CHROME);
         driverManager.createDriver();
         driver =driverManager.getDriver();
         driverManager.maximizeWindow();
