@@ -33,7 +33,7 @@ public class LoginTest extends BaseTest {
         loginPage.inputLogin(USER_NAME);
         loginPage.inputPassword(PASSWORD);
         loginPage.clickLogInButton();
-        removeTimeout();
+        driverManager.removeTimeout();
         ProductsPage productsPage = new ProductsPage(driver);
         productsPage.clickOnLinkedInButton();
         productsPage.switchToNewTab();
