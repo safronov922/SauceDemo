@@ -29,12 +29,15 @@ public class ProductsPage extends BasePage {
         super(driver);
     }
 
-    public void clickAddBikeLightButton() {
+
+    public ProductsPage clickAddBikeLightButton() {
         addBikeLightButton.click();
+        return this;
     }
 
-    public void clickShoppingContainer() {
+    public ProductsPage clickShoppingContainer() {
         shoppingContainer.click();
+        return this;
     }
 
     public String getItemName() {
@@ -45,11 +48,12 @@ public class ProductsPage extends BasePage {
         return price.getText();
     }
 
-    public void clickOnLinkedInButton() {
+    public LinkedInPage clickOnLinkedInButton() {
         linkedInButton.click();
+        return new LinkedInPage(driver);
     }
 
-    public void switchToNewTab() {
+    public LinkedInPage switchToNewTab() {
         String oldTabHandle = driver.getWindowHandle();
         Set<String> tabHandles = driver.getWindowHandles();
         for (String newTabIndex : tabHandles) {
@@ -57,5 +61,6 @@ public class ProductsPage extends BasePage {
                 driver.switchTo().window(newTabIndex);
             }
         }
+        return new LinkedInPage(driver);
     }
 }

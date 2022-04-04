@@ -26,20 +26,28 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public void openLogInPage() {
+    public boolean isUrlLoaded(){
+        return driver.getCurrentUrl().equals(WebUrls.BASE_URL);
+    }
+
+    public LoginPage openLogInPage() {
         driver.get(WebUrls.BASE_URL);
+        return this;
     }
 
-    public void inputLogin(String login) {
+    public LoginPage inputLogin(String login) {
         loginInput.sendKeys(login);
+        return this;
     }
 
-    public void inputPassword(String password) {
+    public LoginPage inputPassword(String password) {
         passwordInput.sendKeys(password);
+        return this;
     }
 
-    public void clickLogInButton() {
+    public ProductsPage clickLogInButton() {
         logInButton.click();
+        return new ProductsPage(driver);
     }
 
     public String getPageName() {

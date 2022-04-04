@@ -19,25 +19,24 @@ public class LoginTest extends BaseTest {
     @Test
     public void logInTest() {
         loginPage = new LoginPage(driver);
-        loginPage.openLogInPage();
-        loginPage.inputLogin(USER_NAME);
-        loginPage.inputPassword(PASSWORD);
-        loginPage.clickLogInButton();
+        loginPage.openLogInPage()
+                .inputLogin(USER_NAME)
+                .inputPassword(PASSWORD)
+                .clickLogInButton();
         Assert.assertEquals(loginPage.getPageName(), "PRODUCTS");
     }
 
     @Test
     public void checkLogoTest() {
         loginPage = new LoginPage(driver);
-        loginPage.openLogInPage();
-        loginPage.inputLogin(USER_NAME);
-        loginPage.inputPassword(PASSWORD);
-        loginPage.clickLogInButton();
-        removeTimeout();
+        loginPage.openLogInPage()
+                .inputLogin(USER_NAME)
+                .inputPassword(PASSWORD)
+                .clickLogInButton();
+        driverManager.removeTimeout();
         ProductsPage productsPage = new ProductsPage(driver);
         productsPage.clickOnLinkedInButton();
-        productsPage.switchToNewTab();
-        LinkedInPage linkedInPage = new LinkedInPage(driver);
-        Assert.assertTrue(linkedInPage.logoIconWait(), "Logo don't displayed");
+        boolean logoDiplayed= productsPage.switchToNewTab().logoIconWait();
+        Assert.assertTrue(logoDiplayed, "Logo don't displayed");
     }
 }
