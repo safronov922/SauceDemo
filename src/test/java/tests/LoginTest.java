@@ -1,6 +1,9 @@
 package tests;
 
+import javafx.scene.shape.Path;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,6 +13,10 @@ import pagefactorypages.LinkedInPage;
 import pagefactorypages.LoginPage;
 import pagefactorypages.ProductsPage;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class LoginTest extends BaseTest {
 
     private static final String USER_NAME = "standard_user";
@@ -17,17 +24,20 @@ public class LoginTest extends BaseTest {
     LoginPage loginPage;
 
     @Test
-    public void logInTest() {
+    public void logInTest() throws IOException {
         loginPage = new LoginPage(driver);
         loginPage.openLogInPage()
                 .inputLogin(USER_NAME)
                 .inputPassword(PASSWORD)
                 .clickLogInButton();
+        TakesScreenshot screenshot = ((TakesScreenshot) driver);
+        byte[] sourceFile = screenshot.getScreenshotAs(OutputType.BYTES);
+        Files.write(Paths.get("src/test/resources/screenshot.png"),sourceFile);
         Assert.assertEquals(loginPage.getPageName(), "PRODUCTS");
     }
 
     @Test
-    public void checkLogoTest() {
+    public void checkLogoTest() throws IOException {
         loginPage = new LoginPage(driver);
         loginPage.openLogInPage()
                 .inputLogin(USER_NAME)
@@ -37,6 +47,9 @@ public class LoginTest extends BaseTest {
         ProductsPage productsPage = new ProductsPage(driver);
         productsPage.clickOnLinkedInButton();
         boolean logoDiplayed= productsPage.switchToNewTab().logoIconWait();
+        TakesScreenshot screenshot = ((TakesScreenshot) driver);
+        byte[] sourceFile = screenshot.getScreenshotAs(OutputType.BYTES);
+        Files.write(Paths.get("src/test/resources/screenshot2.png"),sourceFile);
         Assert.assertTrue(logoDiplayed, "Logo don't displayed");
     }
 }

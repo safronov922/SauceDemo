@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeTest;
 import staticdata.WebTimeouts;
 import utilits.PropertiesManager;
 
+import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
@@ -21,14 +22,13 @@ public class BaseTest {
     DriverManager driverManager;
 
     @BeforeMethod
-    public void setUp() {
+    public void setUp() throws MalformedURLException {
         DriverFactory driverFactory = new DriverFactory();
-        driverManager = driverFactory.getManager(DriverType.CHROME);
+        driverManager = driverFactory.getManager(DriverType.REMOTE);
         driverManager.createDriver();
         driver =driverManager.getDriver();
         driverManager.maximizeWindow();
         driverManager.setTimeout();
-        driverManager.removeTimeout();
     }
 
     @AfterMethod
