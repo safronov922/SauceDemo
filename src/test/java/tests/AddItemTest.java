@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pagefactorypages.LoginPage;
 import pagefactorypages.ProductsPage;
+import utilits.RetryAnalyzer;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,7 +18,7 @@ public class AddItemTest extends BaseTest {
     LoginPage loginPage;
     ProductsPage productsPage;
 
-    @Test
+    @Test (retryAnalyzer = RetryAnalyzer.class)
     public void addItemToBasketTest() throws IOException {
         loginPage = new LoginPage(driver);
         loginPage.openLogInPage();

@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import pagefactorypages.LinkedInPage;
 import pagefactorypages.LoginPage;
 import pagefactorypages.ProductsPage;
+import utilits.RetryAnalyzer;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,7 +24,7 @@ public class LoginTest extends BaseTest {
     private static final String PASSWORD = "secret_sauce";
     LoginPage loginPage;
 
-    @Test
+    @Test (retryAnalyzer = RetryAnalyzer.class)
     public void logInTest() throws IOException {
         loginPage = new LoginPage(driver);
         loginPage.openLogInPage()
@@ -36,7 +37,7 @@ public class LoginTest extends BaseTest {
         Assert.assertEquals(loginPage.getPageName(), "PRODUCTS");
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void checkLogoTest() throws IOException {
         loginPage = new LoginPage(driver);
         loginPage.openLogInPage()

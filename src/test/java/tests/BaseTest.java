@@ -5,15 +5,14 @@ import driver.factorydriver.DriverManager;
 import driver.factorydriver.DriverType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 import staticdata.WebTimeouts;
 import utilits.PropertiesManager;
+import utilits.TestListeners;
 
 import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
-
+@Listeners(TestListeners.class)
 public class BaseTest {
     private static final String USER_NAME = "standard_user";
     private static final String PASSWORD = "secret_sauce";
@@ -22,13 +21,24 @@ public class BaseTest {
     DriverManager driverManager;
 
     @BeforeMethod
-    public void setUp() throws MalformedURLException {
+    @Parameters({"browser"})
+    public void setUp(@Optional("chrome") String browser) throws MalformedURLException {
         DriverFactory driverFactory = new DriverFactory();
-        driverManager = driverFactory.getManager(DriverType.REMOTE);
+        DriverType driverType = null;
+        if(browser.equals("chrome")){
+            driverType = DriverType.CHROME;
+        }
+        if (browser.equals("firefox")){
+            driverType = DriverType.MOZILLA;
+        }
+        driverManager = driverFactory.getManager(driverType);
         driverManager.createDriver();
         driver =driverManager.getDriver();
         driverManager.maximizeWindow();
         driverManager.setTimeout();
+    }
+    public WebDriver getDriver(){
+        return driver;
     }
 
     @AfterMethod
